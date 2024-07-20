@@ -1,0 +1,124 @@
+<section class="mt-5 bg-success rounded-5 size-card">
+  <form [formGroup]="registry" class="d-flex flex-column p-6 mb-3">
+    <label class="text-uppercase" for="username">Nome completo </label>
+    <input
+      type="text"
+      formControlName="username"
+      id="username"
+      placeholder="Ex.: João da Silva"
+      class="form-control"
+    />
+    <p class="text-warning" *ngIf="registry.get('username')?.errors && registry.get('username')?.touched">O nome é obrigatório.</p>
+
+    <label class="text-uppercase mt-4" for="email">E-mail </label>
+    <input
+      type="email"
+      formControlName="email"
+      id="email"
+      placeholder="Ex.: joaodasilva@mail.com"
+      class="form-control"
+    />
+    <p class="text-warning" *ngIf="registry.get('email')?.errors?.['required'] && registry.get('email')?.touched">O cadastro de e-mail é obrigatório.</p>
+    <p class="text-warning" *ngIf="registry.get('email')?.errors?.['pattern'] && registry.get('email')">Formato de e-mail inválido. Verifique o endereço de e-mail.</p>
+
+    <label class="text-uppercase mt-4" for="cpf">CPF </label>
+    <input
+      formControlName="cpf"
+      id="cpf"
+      class="form-control"
+      [mask]="'000.000.000-00'"
+    />
+    <p class="text-warning" *ngIf="registry.get('cpf')?.errors?.['required'] && registry.get('cpf')?.touched">O cadastro de CPF é obrigatório.</p>
+    <p class="text-warning" *ngIf="registry.get('cpf')?.errors?.['pattern'] && registry.get('cpf')">Formato de CPF inválido. Verifique o CPF.</p>
+
+    <label class="text-uppercase mt-4" for="birthday">Data de Nascimento</label>
+    <input
+      type="date"
+      formControlName="birthday"
+      id="birthday"
+      class="form-control"
+    />
+    <p class="text-warning" *ngIf="registry.get('birthday')?.errors?.['required'] && registry.get('birthday')?.touched">O cadastro de aniversário é obrigatório.</p>
+
+    <label class="text-uppercase mt-4" for="phone">Telefone Celular</label>
+    <div class="input-group">
+      <input
+      placeholder="(XX)XXXXX-XXXX"
+        formControlName="phone"
+        id="phone"
+        class="form-control w-50"
+        mask="(00) 00000-0000"
+      />
+    </div>
+    <p class="text-warning" *ngIf="registry.get('ddd')?.errors?.['required'] && registry.get('ddd')?.touched">O cadastro de DDD é obrigatório.</p>
+    <p class="text-warning" *ngIf="registry.get('ddd')?.errors?.['pattern'] && registry.get('ddd')">Formato de DDD inválido. O DDD deve conter 3 digitos.</p>
+    <p class="text-warning" *ngIf="registry.get('phone')?.errors?.['required'] && registry.get('phone')?.touched">O cadastro de número de telefone é obrigatório.</p>
+    <p class="text-warning" *ngIf="registry.get('phone')?.errors?.['pattern'] && registry.get('phone')">Formato de número telefônico inválido. Verifique a quantidade de digitos.</p>
+
+    <label class="text-uppercase mt-4" for="cep">CEP</label>
+    <div class="d-flex gap-2">
+      <input
+        formControlName="cep"
+        id="cep"
+        class="form-control"
+        mask="00000-000"
+      />
+      <button class="shadow w-50 btn btn-success rounded-3 border-white" (click)="validateCEP()">Pesquisar</button>
+    </div>
+    <p class="text-warning" *ngIf="registry.get('cep')?.errors?.['required'] && registry.get('cep')?.touched">O cadastro de CEP é obrigatório.</p>
+    <p class="text-warning" *ngIf="registry.get('cep')?.errors?.['pattern'] && registry.get('cep')">Formato de CEP inválido. Verifique a quantidade de digitos.</p>
+
+    <div *ngIf="registry.get('cep')?.valid && addressDiv">
+      <label class="text-uppercase mt-4" for="state">Estado</label>
+      <input
+        type="text"
+        formControlName="state"
+        id="state"
+        class="form-control"
+      />
+      <label class="text-uppercase mt-4" for="city">Cidade</label>
+      <input
+        type="text"
+        formControlName="city"
+        id="city"
+        class="form-control"
+      />
+
+      <label class="text-uppercase mt-4" for="district">Bairro/Distrito</label>
+      <input
+        type="text"
+        formControlName="district"
+        id="district"
+        class="form-control"
+      />
+
+      <label class="text-uppercase mt-4" for="address">Logradouro</label>
+      <div class="input-group">
+        <input
+          type="text"
+          formControlName="address"
+          id="address"
+          class="form-control w-50"
+        />
+        <span class="input-group-text">Nº</span>
+        <input
+          type="number"
+          formControlName="addressNumber"
+          id="addressNumber"
+          class="form-control"
+        />
+      </div>
+    </div>
+
+    <button (click)="register()" class="shadow btn btn-primary w-100 bg-white mt-5 rounded-5 border-dark text-black" [disabled]="!registry.valid">
+      Cadastrar
+    </button>
+  </form>
+</section>
+
+<button
+  class="btn btn-success w-100 mt-3 rounded-5 mb-3"
+  routerLink="/"
+>
+  Voltar ao Menu
+</button>

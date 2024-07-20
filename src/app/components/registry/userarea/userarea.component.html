@@ -1,0 +1,11 @@
+<section class="m-top-max bg-success rounded-5 size-card p-5">
+  <h1 >Bem-vindo ao CEPride, {{ userInfo[0]?.username }}!</h1>
+  <h3 class="pb-5">Pelo CEP que você cadastrou <span class="fw-bold">({{ userInfo[0].cep }})</span>, descobrimos que você se orgulha em:</h3>
+  <div class="d-flex align-items-center justify-content-between gap-5">
+    <p class="fs-4">Ser um morador da <span class="fw-bold">{{ userInfo[0].address }} Nº {{ userInfo[0].addressNumber }}</span>
+    <br>Localizada no bairro <span class="fw-bold">{{ userInfo[0].district }}</span>
+    <br>Da cidade de <span class="fw-bold">{{ userInfo[0].city }}, {{ userInfo[0].state }}</span>.</p>
+    <img class="rounded-5" src="../../../../assets/img/{{userInfo[0].state}}.png" alt="Imagem da bandeira de {{userInfo[0].state}}">
+  </div>
+</section>
+<button class="btn btn-light w-100 mt-3 m-bottom-max rounded-5 border border-success" routerLink="/">Voltar ao Menu</button>
